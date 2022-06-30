@@ -30,14 +30,18 @@ class LoginActivity : AppCompatActivity() {
         binding.bvLogin.setOnClickListener {
             val user = binding.etUsername.text.toString()
             val password =  binding.etPassword.text.toString()
-            var login = LoginModel(user,password)
+            val login = LoginModel(user,password)
             viewModel.authentication(login)
-            viewModel.response.observe(this){
-                if(it.accessAuth){
-                    startActivity(Intent(this, HomeActivity::class.java))
-                }else{
-                    Toast.makeText(this, "Usuario ou senha invalidos", Toast.LENGTH_LONG).show()
-                }
+        }
+        observes()
+    }
+
+    private fun observes(){
+        viewModel.response.observe(this){
+            if(it.accessAuth){
+                startActivity(Intent(this, HomeActivity::class.java))
+            }else{
+                Toast.makeText(this, "Usuario ou senha invalidos", Toast.LENGTH_LONG).show()
             }
         }
     }

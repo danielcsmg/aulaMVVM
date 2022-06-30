@@ -12,12 +12,11 @@ class LoginViewModel : ViewModel() {
     private var _response: MutableLiveData<LoginModel> = MutableLiveData()
     val response: LiveData<LoginModel> = _response
 
-    fun authentication (login : LoginModel){
+    fun authentication(login: LoginModel) {
         try {
             _response.value = repository.authenticate(login)
-        }catch (ex: Exception){
+        } catch (ex: Exception) {
             Log.i("Error", "------> ${ex.message}")
         }
-
     }
 }
